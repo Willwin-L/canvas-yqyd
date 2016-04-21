@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>圆圈和直线移动</title>
+        <style>
+            #canvas{border: 2px solid #ccc}
+        </style>
+    </head>
+    <body>
+        <canvas id="canvas" width="600" height="600"></canvas>
+
+        <script>
+
+            var can = document.getElementById('canvas');
+            var con = can.getContext('2d');
+
+            //画 圆圈
+            function drew(x,y){
+                con.save()
+                con.fillStyle = '#66f';
+                con.lineWidth = 4;
+                con.beginPath();
+                con.arc(x,y,30,2*Math.PI,false);
+
+                con.fill();
+                con.restore()
+            }
+
+            //获取 x y 的值
+            can.onmousedown = function(e){
+                     var x = e.pageX - can.offsetLeft;
+                     var y = e.pageY - can.offsetTop;
+                     drew(x,y)  
+                     //移动事件
+               can.onmousemove = function(e){
+                     var x = e.pageX - can.offsetLeft;
+                     var y = e.pageY - can.offsetTop;
+                     drew(x,y)
+                }
+            } 
+
+            //当鼠标松开的时候 
+            can.onmouseup = function(){
+                can.onmousemove = null;
+            } 
+        </script>
+    </body>
+</html>
